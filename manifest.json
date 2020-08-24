@@ -1,17 +1,23 @@
 {
   "manifest_version": 2,
-  "name": "CloseMeetingTabs",
+  "name": "Close Meeting Tabs",
   "version": "1.0",
 
   "description": "closes Zoom and Webex meeting tabs for you",
 
   "permissions": [
     "tabs",
-	"alarms"
+	"alarms",
+	"storage"
   ],
 
   "background":{
-	  "scripts":["background-script.js"]
-  }
+	  "scripts": ["background-script.js"]
+  },
 
+  "options_ui":{
+	"page": "settings/options.html",
+	"browser_style": true,
+	"chrome_style": true
+  }
 }
