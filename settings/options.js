@@ -1,5 +1,4 @@
 function saveOptions(e) {
-	alert("saving");
   e.preventDefault();
   let seconds = document.querySelector("#seconds").value
 	if(! isNan(parseInt(seconds))){

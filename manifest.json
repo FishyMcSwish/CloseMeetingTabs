@@ -19,5 +19,10 @@
 	"page": "settings/options.html",
 	"browser_style": true,
 	"chrome_style": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "addon@example.com"
+    }
   }
 }
