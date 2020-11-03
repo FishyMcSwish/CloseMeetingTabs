@@ -30,12 +30,3 @@ function onError(error) {
   console.log(`Error: ${error}`);
 }
 
-function onGot(item) {
-  if (item.seconds) {
-    let seconds = parseInt(item.seconds);
-	delayInMinutes = seconds / 60;
-  }
-}
-
-let getting = browser.storage.sync.get("seconds");
-getting.then(onGot, onError);
