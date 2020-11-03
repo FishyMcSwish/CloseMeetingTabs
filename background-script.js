@@ -1,21 +1,31 @@
-var zoomSuccessRegex = /^((http[s]?):\/)?\/?((\/\w+)*)(.*)(zoom.us)((\/\w+)*\/)(.*)?(status=|#)success$/
-var webexRegex = /^.*\.webex\.com.*\/meeting\/.*$/
-var liveShareRegex = /https:\/\/prod\.liveshare\.vs.*\.visualstudio\.com\/join\?.*/
+const zoomSuccessRegex = /^((http[s]?):\/)?\/?((\/\w+)*)(.*)(zoom.us)((\/\w+)*\/)(.*)?(status=|#)success$/
+const webexRegex = /^.*\.webex\.com.*\/meeting\/.*$/
+const liveShareRegex = /https:\/\/prod\.liveshare\.vs.*\.visualstudio\.com\/join\?.*/
+const pragliRegex = /^.*pragli\.com\/team.*$/
 
-let delayInMinutes = 0.1
 
 function closeMeetingTab(tabId, changeInfo, tab) {
     if (changeInfo.url) {
         if (zoomSuccessRegex.test(changeInfo.url)) {
-			browser.alarms.create("killZoom" + tabId, {delayInMinutes:delayInMinutes});
+			setKillTabAlarm(tabId)
         }
         if (webexRegex.test(changeInfo.url)) {
-			browser.alarms.create("killZoom" + tabId, {delayInMinutes:delayInMinutes});
+			setKillTabAlarm(tabId)
         }
         if (liveShareRegex.test(changeInfo.url)) {
-			browser.alarms.create("killZoom" + tabId, {delayInMinutes:delayInMinutes});
+			setKillTabAlarm(tabId)
+        }
+        if (pragliRegex.test(changeInfo.url)) {
+			setKillTabAlarmSlow(tabId);
         }
     }
+}
+
+function setKillTabAlarm(tabId){
+	browser.alarms.create("killZoom" + tabId, {delayInMinutes:0.1});
+}
+function setKillTabAlarmSlow(tabId){
+	browser.alarms.create("killZoom" + tabId, {delayInMinutes:0.3});
 }
 
 function handleAlarm(alarmInfo){
