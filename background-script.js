@@ -2,7 +2,7 @@ const zoomSuccessRegex = /^((http[s]?):\/)?\/?((\/\w+)*)(.*)(zoom.us)((\/\w+)*\/
 const webexRegex = /^.*\.webex\.com.*\/meeting\/.*$/
 const liveShareRegex = /https:\/\/prod\.liveshare\.vs.*\.visualstudio\.com\/join\?.*/
 const pragliRegex = /^.*pragli\.com\/team.*$/
-
+const microsoftTeamsRegex = /https:\/\/teams\.microsoft\.com\/dl\/launcher\/launcher\.html?.*/
 
 function closeMeetingTab(tabId, changeInfo, tab) {
     if (changeInfo.url) {
@@ -18,6 +18,9 @@ function closeMeetingTab(tabId, changeInfo, tab) {
         if (pragliRegex.test(changeInfo.url)) {
 			setKillTabAlarmSlow(tabId);
         }
+	if (microsoftTeamsRegex.test(changeInfo.url)) {
+			setKillTabAlarm(tabId);	
+	}
     }
 }
 
